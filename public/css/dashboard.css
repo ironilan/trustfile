@@ -1,0 +1,11 @@
+.error{
+    color: red;
+}
+
+.logo_dash img{
+    height: 88px;
+}
+
+#navbar_global{
+    justify-content: center;
+}

@@ -2,14 +2,13 @@
 @section('breadcrumb')
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb breadcrumb-transparent justify-content-center mb-4">
-        <li class="breadcrumb-item text-secondary"><a href="../index.html">Home</a></li>
-        <li class="breadcrumb-item text-secondary"><a href="./all-spaces.html">United States</a>
+        <li class="breadcrumb-item text-secondary"><a href="/home">Home</a></li>
+        <li class="breadcrumb-item text-secondary"><a href="/dashboard/descargas">Documentos</a>
         </li>
-        <li class="breadcrumb-item text-white active" aria-current="page">L'atelier Vancouver
-            Coworking</li>
+        <li class="breadcrumb-item text-white active" aria-current="page">nombre original</li>
     </ol>
 </nav>
-<h1 class="mb-4">L'atelier Vancouver Coworking</h1>
+<h1 class="mb-4">nombre original</h1>
 <div class="d-block d-md-flex justify-content-center">
     <span class="h6 font-weight-light"><span
             class="fas fa-check-circle mr-1 pr-1"></span>Verified</span>
@@ -569,8 +568,7 @@
                 <aside class="col-12 col-lg-4 mt-3 mt-lg-0">
                     <div class="card bg-soft border-light p-3">
                         <div class="d-flex align-items-baseline">
-                            <span class="h3 font-weight-bold mb-0 mr-1">$ 250</span>
-                            <span class="small">/month</span>
+                            Lista de diapositivas
                         </div>
                     </div>
                     <div class="card border-light mt-4 p-3">

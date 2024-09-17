@@ -127,6 +127,8 @@ class HomeController extends Controller
             'file' => 'required|mimes:png,jpg,jpeg,webp',
         ]);
 
+        return $request->all();
+
         $userId = Auth::id();
 
 

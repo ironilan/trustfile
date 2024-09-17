@@ -84,6 +84,7 @@
             min-width: 199px;
         }
     </style>
+    @yield('librerias_css')
     @yield('estilos')
 </head>
 
@@ -570,6 +571,8 @@
 
     <!-- Spaces custom Javascript -->
     <script src="{{ asset('plantilla_dashboard/assets/js/spaces.js') }}"></script>
+
+    @yield('librerias')
 
     @yield('scripts')
 </body>

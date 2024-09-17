@@ -13,7 +13,7 @@
 
 @section('contenido')
 
-<div class="container">
+{{-- <div class="container">
     <div class="row">
         <div class="col">
             <div class="submit-wizard  mt-md-0 overflow-hidden">
@@ -22,12 +22,8 @@
                         <div class="slideform-group col-10 mb-4 mb-md-0">
                             <h3 class="font-normal">Paso 1: Datos del documento</h3>
                             <p class="lead mb-5">Recuerda que debes ingresar un tpitulo para que puedas identificar el documento que vas a subir.</p>
-                            <input class="form-control mb-3" placeholder="Título" type="text">
-                            <input class="form-control mb-3" placeholder="Proyecto" type="text">
-                            <input class="form-control mb-3" placeholder="Categoría" type="text">
-                            {{-- <textarea class="form-control my-4"
-                                placeholder="Tell coworkers what you love about the space. You can include details about the decor, your amenities, the types of people in your community and the neighbourhood."
-                                id="exampleFormControlTextarea" rows="6" required></textarea> --}}
+                            <input class="form-control mb-3" placeholder="Título" type="text" name="nombre_original" required>
+
                         </div>
                     </div>
                     <div class="slideform-slide justify-content-center align-items-center">
@@ -35,7 +31,19 @@
                             <h3>Paso 2: Ingresa el documento</h3>
                             <p class="lead mb-5">First tell us who you are and a little bit about your business.
                             </p>
-                            <input class="form-control mb-3" placeholder="Company (Legal name)" type="file" accept=".ppt, .pptx">
+
+
+                                <div class="dropzone pr" id="dropzoneImage"></div>
+
+                        </div>
+                    </div>
+
+                    <div class="slideform-slide justify-content-center align-items-center">
+                        <div class="slideform-group col-12 col-md-8">
+                            <h3>Paso 3: Ingresa el documento</h3>
+                            <p class="lead mb-5">First tell us who you are and a little bit about your business.
+                            </p>
+                            <input type="file" class="form-control mr-1" name="archivo" id="archivo" accept="application/pdf">
                         </div>
                     </div>
 
@@ -64,12 +72,12 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
-{{-- <div>
+<div>
 
     <section class="scroll-section" id="default">
-        <input type="hidden" id="idDocumento" value="{{$idDocumento}}">
+        <input type="hidden" id="idDocumento" value="">
         <h2 class="small-title">Generamos el pdf con las imagenes</h2>
         <div class="row">
             <div class="col-12">
@@ -100,15 +108,12 @@
                         <div class="col-6 p-4">
                             <div class="pt-2">
                                 @php
-                                    $existe = file_exists(storage_path("app/public/documentos/$documento->nombre_doc"));
+                                    //$existe = file_exists(storage_path("app/public/documentos/$documento->nombre_doc"));
+                                    $existe = true;
                                 @endphp
 
                                 @if ($existe)
-                                <button class="btn btn-icon btn-icon-end btn-outline-secondary mb-1"
-                                    type="button" id="btnDescargarPdf" data-url="{{Storage::url("documentos/$documento->nombre_doc")}}">
-                                    <span>Download</span>
-                                    <i data-acorn-icon="download"></i>
-                                </button>
+
                                 @else
                                 <button class="btn btn-icon btn-icon-start btn-primary mb-1" type="button" id="btnGenerarPdf" >
                                     <span>Generar pdf</span>
@@ -158,25 +163,42 @@
         </div>
     </section>
 
-</div> --}}
+</div>
 
 
 
 @endsection
 
 @section('librerias_css')
-<link rel="stylesheet" href="{{asset('frontend/css/vendor/dropzone.min.css')}}">
+
+<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
 @endsection
 
 @section('librerias')
-<script src="{{asset('frontend/js/cs/dropzone.templates.js')}}"></script>
-<script src="{{asset('frontend/js/forms/controls.dropzone.js')}}"></script>
-<script type="text/javascript" src="{{asset('frontend/sjcl.js')}}"></script>
+<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
 @endsection
 
 @section('scripts')
 
 <script>
+    Dropzone.autoDiscover = false;
+
+    $(document).ready(function(){
+        $("#dropzoneImage").dropzone({
+            maxFiles: 2000,
+            url: "{{route('documentos.admin.store.fotos')}}",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            params: {
+                id: $('#idDocumento').val()
+            },
+            success: function (file, response) {
+                console.log(response);
+            }
+        });
+    });
+
     $('#btnGenerarPdf').click(function(){
         let url = "/dashboard/admin/documentos/generarPdf";
         let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Documento;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,14 +29,14 @@ class DocumentoController extends Controller
     {
         $userId = Auth::id();
 
-
-        return view('frontend.documentos.create');
+        $entidad = User::getEntidadUser($userId);
+        return view('frontend.documentos.create', compact('entidad'));
     }
 
 
     public function show(Documento $documento)
     {
 
-        return view('frontend.documentos.show', compact('documento'));
+        //return view('frontend.documentos.show', compact('entidad'));
     }
 }
